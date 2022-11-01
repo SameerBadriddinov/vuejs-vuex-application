@@ -19,7 +19,7 @@ const mutations = {
 	},
 	registerFailure(state, payload) {
 		state.isLoading = false
-		state.errors = payload
+		state.errors = payload.errors
 	},
 }
 
