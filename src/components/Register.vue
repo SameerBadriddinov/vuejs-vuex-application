@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import {logo} from '../contstants'
 import ValidationError from '@/components/ValidationError.vue'
 export default {
@@ -31,12 +32,10 @@ export default {
 		ValidationError,
 	},
 	computed: {
-		isLoading() {
-			return this.$store.state.auth.isLoading
-		},
-		validationErrors() {
-			return this.$store.state.auth.errors
-		},
+		...mapState({
+			isLoading: state => state.auth.isLoading,
+			validationErrors: state => state.auth.errors,
+		}),
 	},
 	methods: {
 		submitHandler(e) {
