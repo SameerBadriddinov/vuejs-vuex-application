@@ -4,9 +4,9 @@
 			<img :src="logo" alt="logo" style="width: 100px; cursor: pointer" @click="toHomeHandler" />
 			<h1 class="h3 mb-3 fw-normal mt-3">Register</h1>
 
-			<Input :label="'Name'" :type="'text'" />
-			<Input :label="'Email address'" :type="'email'" />
-			<Input :label="'Password'" :type="'password'" />
+			<Input :label="'Name'" :type="'text'" v-model="username" />
+			<Input :label="'Email address'" :type="'email'" v-model="email" />
+			<Input :label="'Password'" :type="'password'" v-model="password" />
 
 			<Button type="submit" :disabled="isLoading" @click="submitHandler">Register</Button>
 		</form>
@@ -19,6 +19,9 @@ export default {
 	data() {
 		return {
 			logo,
+			username: '',
+			email: '',
+			password: '',
 		}
 	},
 	computed: {
@@ -30,13 +33,16 @@ export default {
 		submitHandler(e) {
 			e.preventDefault()
 			const data = {
-				username: 'samdwamdwadsdwadwaadwaidwa',
-				email: 'info@sadsdasdwawadwadwaam.adwax',
-				password: 'sadawdaw',
+				username: this.username,
+				email: this.email,
+				password: this.password,
 			}
 			this.$store
 				.dispatch('register', data)
-				.then(user => console.log('USER', user))
+				.then(user => {
+					console.log('USER', user)
+					this.$router.push({name: 'home'})
+				})
 				.catch(err => console.log('ERROR', err))
 		},
 	},
