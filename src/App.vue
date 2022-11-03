@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import {Navbar} from '@/components'
 import {RouterView} from 'vue-router'
 export default {
