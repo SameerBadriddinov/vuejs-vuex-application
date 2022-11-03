@@ -19,12 +19,12 @@
 				<p class="card-title fw-bold">
 					{{ article.title }}
 				</p>
-				<p class="card-text">
-					{{ article.body }}
-				</p>
+				<p class="card-text">{{ article.body.slice(0, 250) }}</p>
 				<div class="d-flex justify-content-between align-items-center card-footer">
 					<div class="btn-group">
-						<button type="button" class="btn btn-sm btn-outline-secondary">Read article</button>
+						<button type="button" class="btn btn-sm btn-outline-secondary" @click="navigateHandler">
+							Read article
+						</button>
 						<!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
 					</div>
 					<small class="text-muted">{{
@@ -42,6 +42,11 @@ export default {
 		article: {
 			type: Object,
 			required: true,
+		},
+	},
+	methods: {
+		navigateHandler() {
+			return this.$router.push(`/article/${this.article.slug}`)
 		},
 	},
 }
