@@ -5,7 +5,7 @@ const ArticleService = {
 		return axios.get('/articles')
 	},
 	articleDetail(slug) {
-		return axios.get(`/article/${slug}`)
+		return axios.get(`/articles/${slug}`)
 	},
 }
 
