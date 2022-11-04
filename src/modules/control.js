@@ -5,24 +5,35 @@ const state = {
 }
 
 const mutations = {
-	createArticleStart(state) {
+	controlArticleStart(state) {
 		state.isLoading = true
 	},
-	createArticleSuccess() {
+	controlArticleSuccess() {
 		state.isLoading = false
 	},
-	createArticleFailure() {
+	controlArticleFailure() {
 		state.isLoading = false
 	},
 }
 
 const actions = {
 	createArticle(context, article) {
-		return new Promise((resolve, reject) => {
-			context.commit('createArticleStart')
+		return new Promise(() => {
+			context.commit('controlArticleStart')
 			ArticleService.createArticle(article)
-				.then(() => context.commit('createArticleSuccess'))
-				.catch(() => context.commit('createArticleFailure'))
+				.then(() => context.commit('controlArticleSuccess'))
+				.catch(() => context.commit('controlArticleFailure'))
+		})
+	},
+	deleteArticle(context, slug) {
+		return new Promise(resolve => {
+			context.commit('controlArticleStart')
+			ArticleService.deleteArticle(slug)
+				.then(() => {
+					context.commit('controlArticleSuccess')
+					resolve()
+				})
+				.catch(() => context.commit('controlArticleFailure'))
 		})
 	},
 }
